@@ -1,25 +1,31 @@
 package com.robuvictor;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 
 /**
  * Hello world!
  *
  */
-public class App
-{
-    public static final Logger logger = Logger.getLogger(App.class.getName());
-
+public class App {
         public static void main(String[] args) throws ClassNotFoundException, IOException {
+            String csvFile = "/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/Interview-task-data-osh.csv";
+            File badDataFile = new File("/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/bad-data.csv");
+            File goodDataFile = new File("/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/good-data.csv");
+
 
             CSVReader csvReader = new CSVReader();
-            csvReader.readCSV();
+            csvReader.readCSV(new File(csvFile));
+            ArrayList<String[]> goodData = csvReader.goodData;
+            csvReader.writeToLogFile();
+            csvReader.writeToCSV(csvReader.badData, badDataFile);
+            csvReader.writeToCSV(goodData, goodDataFile);
 
             // load the sqlite-JDBC driver using the current class loader
             Class.forName("org.sqlite.JDBC");
@@ -28,7 +34,6 @@ public class App
             try
             {
                 // create a database connection
-                logger.info("In try/catch");
                 connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
                 Statement statement = connection.createStatement();
                 statement.setQueryTimeout(30);  // set timeout to 30 sec.

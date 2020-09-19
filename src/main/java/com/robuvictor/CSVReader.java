@@ -1,10 +1,23 @@
 package com.robuvictor;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class CSVReader {
-    public static boolean checkIsValid(String[] str){
+    ArrayList<String[]> goodData;
+    ArrayList<String[]> badData;
+
+    private int received = 0;
+    private int successful = 0;
+    private int failed = 0;
+
+    private static boolean checkIsValid(String[] str){
         for (String s : str){
             if ("".equals(s)){
                 return false;
@@ -13,58 +26,84 @@ public class CSVReader {
         return true;
     }
 
-    public void readCSV() throws IOException {
+    public void writeToCSV(ArrayList<String[]> data, File csvFile) throws IOException {
+        FileWriter fw = new FileWriter(csvFile);
+        BufferedWriter bw = new BufferedWriter(fw);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = format.format(new Date());
 
-        String csvFile = "/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/Interview-task-data-osh.csv";
+        bw.write("Date: " + dateString);
+        bw.newLine();
+        bw.write("A,B,C,D,E,F,G,H,I,J");
+        bw.newLine();
+        for (String[] s : data) {
+            for(int i = 0; i < 10; i++){
+                bw.write(s[i]);
+                if (i < 9){
+                    bw.write(",");
+                }
+            }
+            bw.newLine();
+        }
+        bw.close();
+        fw.close();
+    }
+
+    public void readCSV(File csvFile) throws IOException {
         BufferedReader br = null;
-        String line = "";
-        int received = 0;
-        int successful = 0;
-        int failed = 0;
-        ArrayList<String[]> goodData = new ArrayList<>();
-        ArrayList<String[]> badData = new ArrayList<>();
+        String line;
+
+        goodData = new ArrayList<>();
+        badData = new ArrayList<>();
 
         try {
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 if ("".equals(line)) {
-                    continue;
+                    break;
                 } else {
                     // use comma as separator
                     String[] value = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                     ++received;
                     if (CSVReader.checkIsValid(value)){
-                        System.out.println("A: " + value[0] + " , B: " + value[1] + " , C: " + value[2]
-                                + " , D: " + value[3] + " , E: " + value[4]
-                                + " , F: " + value[5] + " , G: " + value[6]
-                                + " , H: " + value[7] + " , I: " + value[8] + " , J: " + value[9]);
                         goodData.add(value);
                     } else {
                         badData.add(value);
-                        continue;
                     }
                 }
             }
 
+            for (String[] row: goodData) {
+                for (String data: row) {
+                    System.out.println("goodData: " + data);
+                }
+            }
+
+            for (int i = 0; i < goodData.size(); i++) {
+                System.out.println("=================== goodData =========================");
+
+            }
+
+            goodData.remove(0);
+            received--;
             successful = goodData.size();
             failed = badData.size();
+
+            System.out.println("============== total =================");
 
             System.out.println();
             System.out.println("received = " + received);
             System.out.println("successful = " + successful);
             System.out.println("failed = " + failed);
 
-            System.out.println("============================================");
-
             for(String[] t : badData) {
+                System.out.println("================ badData ===================");
                 for (String s: t){
                     System.out.println("> "+ s);
                 }
-                System.out.println("============================================");
+
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             if (br != null) {
@@ -79,19 +118,28 @@ public class CSVReader {
         File badDataFile = new File("/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/bad-data.csv");
         FileWriter fw = new FileWriter(badDataFile);
         BufferedWriter bw = new BufferedWriter(fw);
+    }
 
-        bw.write("A,B,C,D,E,F,G,H,I,J");
-        bw.newLine();
-        for (String[] s : badData) {
-            for(int i = 0; i < 10; i++){
-                bw.write(s[i]);
-                if (i < 9){
-                    bw.write(",");
-                }
-            }
-            bw.newLine();
+    public void writeToLogFile(){
+        Logger logger = Logger.getLogger("MyLog");
+        FileHandler fh;
+
+        try {
+
+            // This block configure the logger with handler and formatter
+            fh = new FileHandler("/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/MyLogFile.log");
+            logger.addHandler(fh);
+
+            SimpleFormatter formatter = new SimpleFormatter();
+            fh.setFormatter(formatter);
+
+            // the following statement is used to log any messages
+            logger.info("Received rows: " + received);
+            logger.info("Successful rows: " + successful);
+            logger.info("Failed rows: " + failed);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        bw.close();
-        fw.close();
     }
 }
