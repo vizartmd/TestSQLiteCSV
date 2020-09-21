@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" maxHeight="420.0" maxWidth="850.0" minHeight="420.0"
+            minWidth="850.0" prefHeight="420.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8"
+            fx:controller="com.robuvictor.IntroDataController">
+    <children>
+        <Button fx:id="choseCsvFile" layoutX="645.0" layoutY="102.0" mnemonicParsing="false"
+                onMouseClicked="#choseFileCSV" text="Browse to the CSV file"/>
+        <TextField fx:id="textFieldBadCsv" disable="true" editable="false" layoutX="45.0" layoutY="180.0"
+                   prefHeight="27.0" prefWidth="572.0"/>
+        <Button fx:id="choseBadFileDirectory" disable="true" layoutX="645.0" layoutY="180.0" mnemonicParsing="false"
+                onMouseClicked="#choseDirectoryForBadDataCSV" prefHeight="27.0" prefWidth="156.0"
+                text="Select directory"/>
+        <Button fx:id="choseLogFileDirectory" disable="true" layoutX="645.0" layoutY="259.0" mnemonicParsing="false"
+                onMouseClicked="#choseDirectoryForMyLogFile" prefHeight="27.0" prefWidth="156.0"
+                text="Select directory"/>
+        <TextField fx:id="textFieldMyLogFile" disable="true" editable="false" layoutX="45.0" layoutY="259.0"
+                   prefHeight="27.0" prefWidth="572.0"/>
+        <Label fx:id="labelTitle" layoutX="45.0" layoutY="79.0" prefHeight="17.0" prefWidth="572.0"
+               text="Select a CSV file with 10 columns - &quot;A, B, C, D, E, F, G, H, I, J&quot; for parsing"
+               textFill="RED"/>
+        <TextField fx:id="textFieldCsv" editable="false" layoutX="45.0" layoutY="102.0" prefHeight="27.0"
+                   prefWidth="572.0"/>
+        <Label fx:id="labelBadCsv" layoutX="45.0" layoutY="157.0" prefHeight="17.0" prefWidth="572.0"/>
+        <Label fx:id="labelLog" layoutX="45.0" layoutY="236.0" prefHeight="17.0" prefWidth="572.0"/>
+        <Button fx:id="reset" layoutX="645.0" layoutY="345.0" mnemonicParsing="false" onMouseClicked="#resetAll"
+                prefHeight="27.0" prefWidth="156.0" text="Reset all"/>
+        <Button fx:id="goProcessing" disable="true" layoutX="45.0" layoutY="345.0" mnemonicParsing="false"
+                onMouseClicked="#goAway" prefHeight="27.0" prefWidth="572.0" text="Run"/>
+        <Text fill="#353535" layoutX="175.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Java application &quot;CSV file parser&quot;" textAlignment="CENTER" wrappingWidth="500.0">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Text>
+    </children>
+</AnchorPane>
