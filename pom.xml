@@ -30,6 +30,13 @@
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
     </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-api</artifactId>
+          <version>2.12.1</version>
+      </dependency>
+
       <dependency>
           <groupId>commons-io</groupId>
           <artifactId>commons-io</artifactId>
@@ -108,18 +115,40 @@
                   </execution>
               </executions>
           </plugin>
-
-      </plugins>
-    </pluginManagement>
-      <plugins>
+          <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <configuration>
+                  <finalName>TestSQLiteCSV</finalName>
+                  <appendAssemblyId>false</appendAssemblyId>
+                  <archive>
+                      <manifest>
+                          <mainClass>com.robuvictor.JavaFX.FXMLapplication</mainClass>
+                      </manifest>
+                  </archive>
+                  <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
+              </configuration>
+          </plugin>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-compiler-plugin</artifactId>
               <configuration>
-                  <source>8</source>
-                  <target>8</target>
+                  <source>1.8</source>
+                  <target>1.8</target>
               </configuration>
           </plugin>
       </plugins>
+    </pluginManagement>
+      <!--<plugins>-->
+      <!--<plugin>-->
+      <!--<groupId>org.apache.maven.plugins</groupId>-->
+      <!--<artifactId>maven-compiler-plugin</artifactId>-->
+      <!--<configuration>-->
+      <!--<source>8</source>-->
+      <!--<target>8</target>-->
+      <!--</configuration>-->
+      <!--</plugin>-->
+      <!--</plugins>-->
   </build>
 </project>
