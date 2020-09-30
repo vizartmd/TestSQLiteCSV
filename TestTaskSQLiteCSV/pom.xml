@@ -106,7 +106,7 @@
                   <appendAssemblyId>false</appendAssemblyId>
                   <archive>
                       <manifest>
-                          <mainClass>com.robuvictor.JavaFX.FXMLapplication</mainClass>
+                          <mainClass>com.robu.JavaFX.FXMLapp</mainClass>
                       </manifest>
                   </archive>
                   <descriptorRefs>

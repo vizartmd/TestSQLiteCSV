@@ -1,4 +1,4 @@
-package com.robuvictor;
+package com.robu;
 
 public class ModelTable {
     private String id, a, b, c, d, e, f, g, h, i, j;

@@ -1,10 +1,10 @@
-package com.robuvictor.JavaFX;
+package com.robu.JavaFX;
 
-import com.robuvictor.ConnectionDB.DAOImpl;
-import com.robuvictor.ConnectionDB.DAOIntf;
-import com.robuvictor.ConnectionDB.DatabaseConnection;
-import com.robuvictor.CsvDAO.CsvDaoImpl;
-import com.robuvictor.ModelTable;
+import com.robu.CsvDAO.CsvDaoImpl;
+import com.robu.ConnectionDB.DAOImpl;
+import com.robu.ConnectionDB.DAOIntf;
+import com.robu.ConnectionDB.DatabaseConnection;
+import com.robu.ModelTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,7 +23,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import static com.robuvictor.JavaFX.FXMLapp.*;
 
 public class ResultSetController implements Initializable {
 
@@ -84,8 +83,8 @@ public class ResultSetController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        note2.setText(badDataFile.toString());
-        note3.setText(logFile);
+        note2.setText(FXMLapp.badDataFile.toString());
+        note3.setText(FXMLapp.logFile);
         populateTable();
     }
 
@@ -113,7 +112,7 @@ public class ResultSetController implements Initializable {
         DAOIntf daoImpl = new DAOImpl();
         daoImpl.deleteData();
         Scene scene = IntroDataController.load();
-        Stage stage = parentWindow;
+        Stage stage = FXMLapp.parentWindow;
         stage.setScene(scene);
         stage.show();
     }
@@ -169,7 +168,7 @@ public class ResultSetController implements Initializable {
     private void showBadDataFromCSV() throws IOException {
         table.setVisible(false);
         CsvDaoImpl csvDao = new CsvDaoImpl();
-        ArrayList<String> arrayList = csvDao.readFromBadDataCSV(badDataFile);
+        ArrayList<String> arrayList = csvDao.readFromBadDataCSV(FXMLapp.badDataFile);
         StringBuilder sb = new StringBuilder("");
         for (String str : arrayList) {
             sb.append(str + "\n");
@@ -193,8 +192,8 @@ public class ResultSetController implements Initializable {
         textArea.toFront();
         textArea.setDisable(false);
         try{
-            FileInputStream fis = new FileInputStream(logFile);
-            System.out.println("logFile: " + logFile);
+            FileInputStream fis = new FileInputStream(FXMLapp.logFile);
+            System.out.println("logFile: " + FXMLapp.logFile);
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
             String strLine;
             StringBuilder sb = new StringBuilder("");

@@ -1,4 +1,4 @@
-package com.robuvictor.ConnectionDB;
+package com.robu.ConnectionDB;
 
 import  java.sql.Connection;
 

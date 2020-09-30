@@ -1,4 +1,4 @@
-package com.robuvictor.JavaFX;
+package com.robu.JavaFX;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

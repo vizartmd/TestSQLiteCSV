@@ -1,6 +1,6 @@
-package com.robuvictor.Logger;
+package com.robu.Logger;
 
-import com.robuvictor.JavaFX.FXMLapp;
+import com.robu.JavaFX.FXMLapp;
 
 import java.util.Date;
 import java.util.logging.Formatter;

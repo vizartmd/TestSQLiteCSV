@@ -1,4 +1,4 @@
-package com.robuvictor.Logger;
+package com.robu.Logger;
 
 import java.io.File;
 import java.io.IOException;

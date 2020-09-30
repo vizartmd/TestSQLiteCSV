@@ -1,10 +1,10 @@
-package com.robuvictor.JavaFX;
+package com.robu.JavaFX;
 
-import com.robuvictor.ConnectionDB.DAOImpl;
-import com.robuvictor.ConnectionDB.DAOIntf;
-import com.robuvictor.CsvDAO.CsvDaoImpl;
-import com.robuvictor.CsvDAO.CsvDaoIntf;
-import com.robuvictor.Logger.MyFormatter;
+import com.robu.CsvDAO.CsvDaoImpl;
+import com.robu.CsvDAO.CsvDaoIntf;
+import com.robu.ConnectionDB.DAOImpl;
+import com.robu.ConnectionDB.DAOIntf;
+import com.robu.Logger.MyFormatter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -97,7 +97,7 @@ public class IntroDataController {
 
     static Scene load() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URL("file:/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/JavaFX/IntroData.fxml"));
+        loader.setLocation(new URL("file:/Users/user/TestTaskSQLiteCSV/TestTaskSQLiteCSV/src/main/java/com/robu/JavaFX/IntroData.fxml"));
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
         return scene;
@@ -186,7 +186,7 @@ public class IntroDataController {
         textFieldBadCsv.setDisable(true);
         textFieldMyLogFile.setDisable(true);
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(new URL("file:/Users/user/TestSQLiteCSV/src/main/java/com/robuvictor/JavaFX/ResultSet.fxml"));
+        loader.setLocation(new URL("file:/Users/user/TestTaskSQLiteCSV/TestTaskSQLiteCSV/src/main/java/com/robu/JavaFX/ResultSet.fxml"));
         AnchorPane anchorPane = loader.load();
         Stage stage = FXMLapp.parentWindow;
         stage.setResizable(false);
