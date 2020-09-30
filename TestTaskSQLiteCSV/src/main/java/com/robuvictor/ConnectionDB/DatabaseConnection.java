@@ -12,7 +12,7 @@ public class DatabaseConnection {
     private DatabaseConnection() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection("jdbc:sqlite:people.db");
+            this.connection = DriverManager.getConnection("jdbc:sqlite::memory:");
         } catch (ClassNotFoundException ex) {
             System.out.println("Database Connection Creation Failed : " + ex.getMessage());
         }
